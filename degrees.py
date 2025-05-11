@@ -118,8 +118,7 @@ def shortest_path(source, target):
             return path_to_target(node_to_explore)
 
         actions = neighbors_for_person(node_to_explore.state)
-        print(actions)
-        print(node_to_explore)
+
 
         # Iterate through actions and add to frontier to explore next
         for action in actions:
@@ -135,12 +134,12 @@ def shortest_path(source, target):
 def path_to_target(target_node):
     current_node = target_node
     path = []
-    while current_node.parent != None:
-        path.add(current_node.action)
+    while current_node.parent is not None:
+        path.append(current_node.action)
         current_node = current_node.parent
 
     #add the first node too because the loop has skipped it
-    path.add(current_node.action)
+    path.append(current_node.action)
 
     return path.reverse()
 
