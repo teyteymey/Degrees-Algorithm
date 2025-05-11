@@ -104,7 +104,7 @@ def shortest_path(source, target):
     start = Node(state=source, parent=None, action=None)
     frontier.add(start)
 
-    explored = set()
+    explored = []
 
     while True:
         # If the frontier is empty, then there is no path to the target
@@ -118,14 +118,18 @@ def shortest_path(source, target):
             return path_to_target(node_to_explore)
 
         actions = neighbors_for_person(node_to_explore.state)
+        print(actions)
+        print(node_to_explore)
 
         # Iterate through actions and add to frontier to explore next
         for action in actions:
             #Add to frontier if not present already and not explored
-            connected_node = Node(state=action.person_id, parent=node_to_explore, action=action)
+            connected_node = Node(state=action[1], parent=node_to_explore, action=action)
 
-            if !frontier.contains_state(action.person_id) and !explored.contains(connected_node):
+            if not frontier.contains_state(connected_node.state) and not any(node.state == connected_node.state for node in explored):
                 frontier.add(connected_node)
+
+        explored.append(node_to_explore)
 
 
 def path_to_target(target_node):
