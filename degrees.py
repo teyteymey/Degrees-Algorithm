@@ -115,7 +115,6 @@ def shortest_path(source, target):
 
         # Check if we found the goal
         if node_to_explore.state == target:
-            #TODO implement function
             return path_to_target(node_to_explore)
 
         actions = neighbors_for_person(node_to_explore.state)
@@ -123,14 +122,24 @@ def shortest_path(source, target):
         # Iterate through actions and add to frontier to explore next
         for action in actions:
             #Add to frontier if not present already and not explored
-                connected_node = Node(state=action.person_id, parent=node_to_explore.state, action=action)
+            connected_node = Node(state=action.person_id, parent=node_to_explore, action=action)
 
             if !frontier.contains_state(action.person_id) and !explored.contains(connected_node):
                 frontier.add(connected_node)
 
 
 def path_to_target(target_node):
-    #TODO
+    current_node = target_node
+    path = []
+    while current_node.parent != None:
+        path.add(current_node.action)
+        current_node = current_node.parent
+
+    #add the first node too because the loop has skipped it
+    path.add(current_node.action)
+
+    return path.reverse()
+
 
 def person_id_for_name(name):
     """
