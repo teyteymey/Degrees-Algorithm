@@ -138,10 +138,8 @@ def path_to_target(target_node):
         path.append(current_node.action)
         current_node = current_node.parent
 
-    #add the first node too because the loop has skipped it
-    path.append(current_node.action)
-
-    return path.reverse()
+    path.reverse()
+    return path
 
 
 def person_id_for_name(name):
